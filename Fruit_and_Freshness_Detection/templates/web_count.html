@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fruit Detection</title>
+    <style>
+        body { text-align: center; }
+        img { max-width: 80%; }
+    </style>
+</head>
+<body>
+    <h1>Real-Time Fruit Detection</h1>
+    <img id="output" src="{{ url_for('static', filename='output.jpg') }}" alt="Detection Result">
+    <h2>Class Counts</h2>
+    <div id="classCounts">
+        {% for class_name, count in class_counts.items() %}
+            <p>{{ class_name }}: {{ count }}</p>
+        {% endfor %}
+    </div>
+    <script>
+        setInterval(() => {
+            document.getElementById("output").src = "{{ url_for('static', filename='output.jpg') }}?t=" + new Date().getTime();
+        }, 1000);  // Update the image every second
+    </script>
+</body>
+</html>
